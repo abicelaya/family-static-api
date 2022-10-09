@@ -45,7 +45,7 @@ class FamilyStructure:
 
     def delete_member(self, id):
         for member_to_look in self._members:
-            if member_to_look.id == id:
+            if member_to_look['id'] == id:
                 self._members.remove(member_to_look)
                 
         # fill this method and update the return
@@ -53,7 +53,7 @@ class FamilyStructure:
 
     def get_member(self, id):
         for member_to_look in self._members:
-            if member_to_look.id == id:
+            if member_to_look['id'] == id:
                 return member_to_look
 
         # fill this method and update the return

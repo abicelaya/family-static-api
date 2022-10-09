@@ -34,20 +34,28 @@ def handle_hello():
 
     return jsonify(members), 200
 
-@app.route('/member/<int:member_id>', method=['GET'])
+@app.route('/member/<int:member_id>', methods=['GET', 'DELETE'])
 def get_member_by_id(member_id):
-    member = jackson_family.get_member(member_id)
+    if request.method == 'GET':
+        member = jackson_family.get_member(member_id)
+        return jsonify(member), 200
 
-    return jsonify(member), 200
+    jackson_family.delete_member(member_id)
+    return jsonify({
+        'done': True
+    }), 200
 
-@app.route('/member', method=['POST'])
+    
+
+@app.route('/member', methods=['POST'])
 def agregar_miembro_nuevo():
     request_body = request.get_json()
     member = jackson_family.add_member(request_body)
 
-    return "creado", 201
+    return "creado", 200
 
-    
+
+
 
 # this only runs if `$ python src/app.py` is executed
 if __name__ == '__main__':
